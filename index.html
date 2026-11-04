@@ -7,7 +7,7 @@
 <meta name="description" content="Shri Shambhubhai Shivabhai Patel Family invites you to the wedding celebrations of Mehul & Dr. Surbhi, 29 January – 2 February 2027.">
 <meta property="og:title" content="Mehul & Dr. Surbhi — Wedding Invitation">
 <meta property="og:description" content="29 Jan – 2 Feb 2027 · Borsad & Surat · Please RSVP">
-<meta property="og:image" content="img3/ganesha.png">
+<meta property="og:image" content="img3/ganesha.webp">
 <meta name="theme-color" content="#fbf5eb">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=EB+Garamond:wght@400;500;600&family=Great+Vibes&family=Noto+Serif+Gujarati:wght@400;500;700&display=swap" rel="stylesheet">
@@ -26,12 +26,21 @@ img{max-width:100%;display:block}
 .wrap{max-width:560px;margin:0 auto;padding:0 14px}
 
 /* ---------- cover ---------- */
-.cover{position:fixed;inset:0;z-index:50;display:grid;place-items:center;text-align:center;padding:24px;
-  background:var(--paper) radial-gradient(ellipse at 50% 40%,#fffdf8 0,var(--paper) 70%);transition:opacity .9s ease,visibility .9s}
-.cover.gone{opacity:0;visibility:hidden}
-.cover .c-corner{position:absolute;width:42vw;max-width:230px;top:0;left:0}
+.cover{position:fixed;inset:0;z-index:50;display:grid;place-items:center;text-align:center;padding:24px;perspective:1600px;transition:visibility 0s 1.6s}
+.cover.gone{visibility:hidden;pointer-events:none}
+.door{position:absolute;top:0;bottom:0;width:50.5%;background:var(--paper) radial-gradient(ellipse at 100% 45%,#fffdf8 0,var(--paper) 75%);
+  transition:transform 1.4s cubic-bezier(.7,0,.3,1);box-shadow:inset 0 0 0 10px var(--paper),inset 0 0 0 11.5px var(--gold-l),inset 0 0 0 16px var(--paper),inset 0 0 0 17px var(--gold-l)}
+.door.l{left:0;transform-origin:0 50%}
+.door.r{right:0;transform-origin:100% 50%;background:var(--paper) radial-gradient(ellipse at 0 45%,#fffdf8 0,var(--paper) 75%)}
+.cover.gone .door.l{transform:rotateY(-105deg)}
+.cover.gone .door.r{transform:rotateY(105deg)}
+.c-in{position:relative;z-index:2;transition:opacity .6s,transform .8s}
+.cover.gone .c-in{opacity:0;transform:scale(1.15)}
+.cover .c-corner{position:absolute;width:84%;max-width:230px;top:0;left:0}
 .cover .c-corner.r{left:auto;right:0;transform:scaleX(-1)}
 .cover .c-corner.b{top:auto;bottom:0;transform:scaleY(-1)}
+.cover .g{animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px)}}
 .cover .c-corner.b.r{transform:scale(-1,-1)}
 .cover .g{width:200px;margin:0 auto 8px}
 .cover .names{font-family:"Great Vibes",cursive;color:var(--gold-d);font-size:58px;line-height:1.05}
@@ -88,7 +97,9 @@ body.gu .sub{font:400 15px/1.7 "Noto Serif Gujarati",serif}
 .family{font:600 18px Cinzel,serif;color:var(--olive-d);letter-spacing:.05em;margin-top:4px}
 body.gu .family{font:700 19px "Noto Serif Gujarati",serif;letter-spacing:0}
 .couple{font-family:"Great Vibes",cursive;font-weight:400;color:var(--gold-d);font-size:clamp(52px,15vw,70px);line-height:1.05;margin-top:12px;letter-spacing:0;
-  background:linear-gradient(180deg,#d5b062,#9c7426);-webkit-background-clip:text;background-clip:text;color:transparent}
+  background-image:linear-gradient(180deg,#d9b866,#9c7426 45%,#e6c77a 70%,#9c7426);-webkit-background-clip:text;background-clip:text;color:transparent}
+.couple{background-size:100% 220%;animation:shine 5s ease-in-out infinite}
+@keyframes shine{50%{background-position:0 100%}}
 .couple i{display:block;font:italic 500 21px "Cormorant Garamond",serif;color:var(--muted);-webkit-text-fill-color:var(--muted);margin:0 0 2px}
 body.gu .couple{font-family:"Noto Serif Gujarati",serif;font-weight:700;font-size:clamp(32px,9vw,42px);line-height:1.35}
 body.gu .couple i{font:400 16px "Noto Serif Gujarati",serif}
@@ -103,38 +114,32 @@ body.gu .pill{font:600 15px "Noto Serif Gujarati",serif;letter-spacing:0}
 .count span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
 body.gu .count span{text-transform:none;letter-spacing:0}
 
-/* schedule */
-.day{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:start;text-align:left;padding:14px 0;border-top:1px solid var(--gold-l)}
-.day:first-of-type{border-top:0}
-.day.single{grid-template-columns:1fr}
-.badge{position:relative;background:linear-gradient(var(--olive),var(--olive-d));color:#fdf6e3;text-align:center;padding:8px 0 9px;
-  clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px);
-  box-shadow:inset 0 0 0 2px var(--gold);line-height:1.05;margin-top:4px}
-.badge::before{content:"";position:absolute;inset:3px;border:1px solid rgba(230,207,149,.6);
-  clip-path:inherit}
-.badge .wd{font:500 15px "EB Garamond",serif}
-.badge .dn{font:700 34px "EB Garamond",serif;display:block;margin:2px 0}
-.badge .mo{font:500 15px "EB Garamond",serif;display:block}
-.badge .yr{font:500 14px "EB Garamond",serif;display:block;margin-top:2px}
-body.gu .badge .wd,body.gu .badge .mo,body.gu .badge .yr{font-family:"Noto Serif Gujarati",serif;font-size:13px}
-body.gu .badge .dn{font-family:"Noto Serif Gujarati",serif;font-size:28px}
-.items{display:grid}
-.item{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:center;padding:8px 0}
-.item + .item{border-top:1px dashed var(--gold-l)}
-.ic{display:grid;justify-items:center;gap:2px}
-.ic img{width:54px;height:44px;object-fit:contain}
-.ic.ring img{width:50px;height:50px}
-.t{font:600 14px "EB Garamond",serif;color:var(--brown);white-space:nowrap}
-body.gu .t{font-family:"Noto Serif Gujarati",serif;font-size:12.5px}
-.what{border-left:1.5px solid var(--gold);padding-left:12px}
-.n{font:600 20px/1.2 "EB Garamond",serif;color:var(--maroon)}
-body.gu .n{font:700 16.5px/1.45 "Noto Serif Gujarati",serif}
-.n small{display:block;font:italic 500 15px "Cormorant Garamond",serif;color:var(--brown)}
-body.gu .n small{font:400 13px "Noto Serif Gujarati",serif}
-.where{display:inline-flex;gap:5px;margin-top:4px;font-size:14.5px;color:var(--ink);text-decoration:none;line-height:1.35}
-body.gu .where{font-size:13px}
-.where svg{flex:none;width:13px;height:13px;margin-top:3px;fill:var(--gold-d)}
+/* schedule — everything centred */
+.day{padding:6px 0 18px;text-align:center}
+.day + .day{border-top:1px solid var(--gold-l);padding-top:22px}
+.day .pill{margin:0 0 6px;font-size:14px;letter-spacing:.1em}
+body.gu .day .pill{font-size:14px}
+.ev{display:flex;flex-direction:column;align-items:center;padding:10px 6px 4px}
+.ev .ic{width:74px;height:60px;object-fit:contain;margin-bottom:2px;transition:transform .4s}
+.ev .ic.ring{width:64px;height:64px}
+.ev:hover .ic{transform:scale(1.08) rotate(-4deg)}
+.t{display:inline-block;font:600 13px Cinzel,serif;letter-spacing:.14em;color:var(--gold-d);border-top:1px solid var(--gold-l);border-bottom:1px solid var(--gold-l);padding:2px 12px;margin:2px 0 6px}
+body.gu .t{font:700 13px "Noto Serif Gujarati",serif;letter-spacing:0}
+.n{font:600 24px/1.15 "EB Garamond",serif;color:var(--maroon)}
+body.gu .n{font:700 19px/1.5 "Noto Serif Gujarati",serif}
+.s{font:italic 500 17px "Cormorant Garamond",serif;color:var(--brown)}
+body.gu .s{font:400 14px "Noto Serif Gujarati",serif}
+.where{display:inline-flex;justify-content:center;gap:5px;margin-top:6px;font-size:15px;color:var(--ink);text-decoration:none;line-height:1.4;max-width:330px;text-align:center}
+body.gu .where{font-size:13.5px}
+.where svg{flex:none;width:13px;height:13px;margin-top:4px;fill:var(--gold-d)}
 .where u{text-decoration:none;border-bottom:1px dotted var(--gold-d)}
+.cal{display:inline-block;margin-top:8px;font:600 12px "EB Garamond",serif;letter-spacing:.06em;color:var(--olive);text-decoration:none;border:1px solid #cdd5b5;border-radius:99px;padding:3px 12px;background:#f7f8ee}
+body.gu .cal{font:500 11.5px "Noto Serif Gujarati",serif;letter-spacing:0}
+.dots{display:flex;justify-content:center;gap:6px;padding:8px 0 2px}
+.dots i{width:4px;height:4px;border-radius:50%;background:var(--gold)}
+.dots i:nth-child(2){width:6px;height:6px;margin-top:-1px}
+.same{margin-top:10px}
+.same .where{font-size:15.5px}
 .hosts{font:600 21px/1.3 "EB Garamond",serif;color:var(--olive-d);margin-top:4px}
 .hosts b{display:block;font:500 22px "Cormorant Garamond",serif;color:var(--olive)}
 body.gu .hosts{font:700 18px/1.5 "Noto Serif Gujarati",serif}
@@ -143,14 +148,17 @@ body.gu .hosts{font:700 18px/1.5 "Noto Serif Gujarati",serif}
 .when-box div{border-left:1px solid var(--gold-l);padding-left:14px;font:600 19px/1.3 "EB Garamond",serif;color:var(--brown);text-align:left}
 body.gu .when-box div{font:700 15px/1.6 "Noto Serif Gujarati",serif}
 .venue-c{margin-top:14px}
-.same{padding:8px 0 0;border-top:1px dashed var(--gold-l);text-align:center}
-.same .where{font-size:15px}
 .venue-c .where{justify-content:center;font-size:16px}
 
 /* tahuko */
 .tahuko-h{display:flex;align-items:center;justify-content:center;gap:6px}
 .tahuko-h img{width:84px}
-.tahuko-h img.r{transform:scaleX(-1)}
+.tahuko-h img{animation:bob 2.6s ease-in-out infinite;transform-origin:50% 100%}
+.tahuko-h img.r{transform:scaleX(-1);animation-name:bobr;animation-delay:-1.3s}
+@keyframes bob{50%{transform:rotate(-6deg) translateY(-3px)}}
+@keyframes bobr{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) rotate(-6deg) translateY(-3px)}}
+.wedo{animation:pop 1.8s ease-in-out infinite}
+@keyframes pop{50%{transform:scale(1.08)}}
 .tag{display:inline-block;padding:5px 20px;background:linear-gradient(var(--olive),var(--olive-d));color:#fdf6e3;font:600 18px "EB Garamond",serif;
   border:1.5px solid var(--gold);border-radius:10px}
 body.gu .tag{font:700 16px "Noto Serif Gujarati",serif}
@@ -193,18 +201,19 @@ footer .sig{font:400 44px "Great Vibes",cursive;color:var(--gold-d);margin-top:4
 /* reveal */
 .rv{opacity:0;transform:translateY(26px);transition:opacity 1s ease,transform 1s ease}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.bells,.open,.music.on svg{animation:none}}
-@media (max-width:400px){.day{grid-template-columns:68px 1fr;gap:9px}.item{grid-template-columns:52px 1fr;gap:8px}.ic img{width:46px;height:38px}.n{font-size:18px}.arch{padding-left:12px;padding-right:12px}.bottom-art{margin-left:-12px;margin-right:-12px;width:calc(100% + 24px)}}
+#petals{position:fixed;inset:0;pointer-events:none;z-index:15}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.bells,.open,.music.on svg,.couple,.tahuko-h img,.wedo,.cover .g{animation:none}#petals{display:none}}
+@media (max-width:400px){.n{font-size:22px}.arch{padding-left:12px;padding-right:12px}.bottom-art{margin-left:-12px;margin-right:-12px;width:calc(100% + 24px)}}
 </style>
 </head>
 <body class="locked">
 
 <!-- cover: the tap that opens the invite also starts the music -->
 <div class="cover" id="cover">
-  <img class="c-corner" src="img3/corner.png" alt=""><img class="c-corner r" src="img3/corner.png" alt="">
-  <img class="c-corner b" src="img3/corner.png" alt=""><img class="c-corner b r" src="img3/corner.png" alt="">
-  <div>
-    <img class="g" src="img3/ganesha.png" alt="Shree Ganesh">
+  <div class="door l"><img class="c-corner" src="img3/corner.webp" alt=""><img class="c-corner b" src="img3/corner.webp" alt=""></div>
+  <div class="door r"><img class="c-corner r" src="img3/corner.webp" alt=""><img class="c-corner b r" src="img3/corner.webp" alt=""></div>
+  <div class="c-in">
+    <img class="g" src="img3/ganesha.webp" alt="Shree Ganesh">
     <div class="mantra" data-i="mantra"></div>
     <div class="names" style="margin-top:14px">Mehul<i>&amp;</i>Surbhi</div>
     <div class="when">29 · 01 · 2027 — 02 · 02 · 2027</div>
@@ -219,15 +228,16 @@ footer .sig{font:400 44px "Great Vibes",cursive;color:var(--gold-d);margin-top:4
   <div class="lang" role="group" aria-label="Language"><button data-l="en" class="on">English</button><button data-l="gu">ગુજરાતી</button></div>
 </div>
 <audio id="audio" loop preload="none"></audio>
+<canvas id="petals"></canvas>
 
 <main class="wrap">
   <!-- hero -->
   <section class="card rv">
-    <img class="corner" src="img3/corner.png" alt=""><img class="corner r" src="img3/corner.png" alt="">
-    <img class="corner b" src="img3/cornerb.png" alt=""><img class="corner b r" src="img3/cornerb.png" alt="">
+    <img class="corner" src="img3/corner.webp" alt=""><img class="corner r" src="img3/corner.webp" alt="">
+    <img class="corner b" src="img3/cornerb.webp" alt=""><img class="corner b r" src="img3/cornerb.webp" alt="">
     <div class="arch">
-      <img class="bells l" src="img3/bell.png" alt=""><img class="bells r" src="img3/bell.png" alt="">
-      <img class="top-art" src="img3/ganesha.png" alt="Shree Ganesh">
+      <img class="bells l" src="img3/bell.webp" alt=""><img class="bells r" src="img3/bell.webp" alt="">
+      <img class="top-art" src="img3/ganesha.webp" alt="Shree Ganesh">
       <div class="mantra" data-i="mantra"></div>
       <svg class="lotus" data-lotus></svg>
       <p class="lead" data-i="lead"></p>
@@ -245,9 +255,9 @@ footer .sig{font:400 44px "Great Vibes",cursive;color:var(--gold-d);margin-top:4
 
   <!-- tahuko -->
   <section class="card rv">
-    <img class="corner b" src="img3/cornerb.png" alt=""><img class="corner b r" src="img3/cornerb.png" alt="">
+    <img class="corner b" src="img3/cornerb.webp" alt=""><img class="corner b r" src="img3/cornerb.webp" alt="">
     <div class="arch" style="padding-top:44px">
-      <div class="tahuko-h"><img src="img3/peacock.png" alt=""><span class="tag" data-i="tahuko"></span><img class="r" src="img3/peacock.png" alt=""></div>
+      <div class="tahuko-h"><img src="img3/peacock.webp" alt=""><span class="tag" data-i="tahuko"></span><img class="r" src="img3/peacock.webp" alt=""></div>
       <p class="tk1" data-i="tk1"></p>
       <p class="tk2" data-i="tk2"></p>
       <span class="wedo" data-i="wedo"></span>
@@ -260,7 +270,7 @@ footer .sig{font:400 44px "Great Vibes",cursive;color:var(--gold-d);margin-top:4
   <!-- rsvp -->
   <section class="card rv" id="rsvp">
     <div class="arch" style="padding-top:40px">
-      <img class="top-art sm" src="img3/kalash.png" alt="" style="margin-top:-8px;max-width:120px">
+      <img class="top-art sm" src="img3/kalash.webp" alt="" style="margin-top:-8px;max-width:120px">
       <h2 data-i="rsvpH"></h2>
       <p class="sub" id="rsvpBy"></p>
       <svg class="lotus" data-lotus></svg>
@@ -313,44 +323,41 @@ const PLACES = {
   ambav:    { en: "Ambav Gam", gu: "આંબાવ ગામ", q: "Ambav Gujarat" },
   krishna:  { en: "Shree Krishna Farm, Mota Varachha, Surat, Gujarat", gu: "શ્રી કૃષ્ણ ફાર્મ, મોટા વરાછા, સુરત, ગુજરાત", q: "Shree Krishna Farm Mota Varachha Surat" }
 };
-const D = (wd, n, m) => ({ wd, n, m });
 const DAYS = {
-  29: D({en:"Fri",gu:"શુક્રવાર"}, {en:"29",gu:"૨૯"}, {en:"Jan",gu:"જાન્યુ."}),
-  30: D({en:"Sat",gu:"શનિવાર"},   {en:"30",gu:"૩૦"}, {en:"Jan",gu:"જાન્યુ."}),
-  31: D({en:"Sun",gu:"રવિવાર"},   {en:"31",gu:"૩૧"}, {en:"Jan",gu:"જાન્યુ."}),
-  2:  D({en:"Tue",gu:"મંગળવાર"},  {en:"2",gu:"૨"},   {en:"Feb",gu:"ફેબ્રુ."})
+  29: {en:"Friday · 29 January 2027", gu:"શુક્રવાર, તા. ૨૯ જાન્યુઆરી ૨૦૨૭", iso:"2027-01-29"},
+  30: {en:"Saturday · 30 January 2027", gu:"શનિવાર, તા. ૩૦ જાન્યુઆરી ૨૦૨૭", iso:"2027-01-30"},
+  31: {en:"Sunday · 31 January 2027", gu:"રવિવાર, તા. ૩૧ જાન્યુઆરી ૨૦૨૭", iso:"2027-01-31"},
+  2:  {en:"Tuesday · 2 February 2027", gu:"મંગળવાર, તા. ૨ ફેબ્રુઆરી ૨૦૨૭", iso:"2027-02-02"}
 };
-const YEAR = {en:"2027",gu:"૨૦૨૭"};
 
 const EVENTS = {
   1: { title:{en:"Pre-Wedding Celebrations",gu:"પૂર્વ વૈવાહિક પ્રસંગો"}, corners:true,
        sub:{en:"We cordially invite you to join us for the auspicious pre-wedding festivities of our son",gu:"અમારા પુત્ર ચિ. મેહુલના શુભ લગ્ન નિમિત્તે યોજાનાર પૂર્વ વૈવાહિક પ્રસંગોમાં આપને સ્નેહભર્યું આમંત્રણ"},
        days:[
         {d:29, items:[
-          {ic:"kalash", t:{en:"11:00 AM",gu:"સવારે ૧૧:૦૦"}, n:{en:"Ganesh Sthapna",gu:"શ્રી ગણેશ સ્થાપના"}, s:{en:"followed by Mandap Muhurat",gu:"ત્યારબાદ મંડપ મુહૂર્ત"}, p:"asodar"},
-          {ic:"dandiya", t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, n:{en:"Garba & Sangeet",gu:"ગરબા તથા સંગીત સંધ્યા"}, p:"starwoods"}]},
+          {ic:"kalash", t:{en:"11:00 AM",gu:"સવારે ૧૧:૦૦"}, at:"2027-01-29T11:00", n:{en:"Ganesh Sthapna",gu:"શ્રી ગણેશ સ્થાપના"}, s:{en:"followed by Mandap Muhurat",gu:"ત્યારબાદ મંડપ મુહૂર્ત"}, p:"asodar"},
+          {ic:"dandiya", t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, at:"2027-01-29T20:00", n:{en:"Garba & Sangeet",gu:"ગરબા તથા સંગીત સંધ્યા"}, p:"starwoods"}]},
         {d:30, items:[
-          {ic:"haldi", t:{en:"11:00 AM",gu:"સવારે ૧૧:૦૦"}, n:{en:"Haldi Ceremony",gu:"હલદી સમારોહ"}, p:"starwoods"},
-          {ic:"kumbh", t:{en:"1:00 PM",gu:"બપોરે ૧:૦૦"}, n:{en:"Grah Shanti",gu:"ગ્રહશાંતિ"}, p:"starwoods"}]}
+          {ic:"haldi", t:{en:"11:00 AM",gu:"સવારે ૧૧:૦૦"}, at:"2027-01-30T11:00", n:{en:"Haldi Ceremony",gu:"હલદી સમારોહ"}, p:"starwoods"},
+          {ic:"kumbh", t:{en:"1:00 PM",gu:"બપોરે ૧:૦૦"}, at:"2027-01-30T13:00", n:{en:"Grah Shanti",gu:"ગ્રહશાંતિ"}, p:"starwoods"}]}
        ]},
   2: { title:{en:"Wedding Vows Renewal",gu:"વિવાહ વચન પુનઃનવીકરણ"}, top:"rings", topSm:true, bottom:"trees",
        sub:{en:"A Special Celebration of Love, Companionship and a Lifetime of Togetherness",gu:"પ્રેમ, સાથ અને જીવનભરના સંગાથની એક વિશેષ ઉજવણી"},
        hosts:{en:["Shri Shambhubhai Shivabhai Patel","Smt. Nikulaben Shambhubhai Patel"],gu:["શ્રી શંભુભાઈ શિવાભાઈ પટેલ","શ્રીમતી નિકુલાબેન શંભુભાઈ પટેલ"]},
        invite:{en:"cordially invite you to grace the Wedding Vows Renewal Ceremony and bless us on this joyous occasion.",gu:"વિવાહ વચન પુનઃનવીકરણ સમારોહમાં પધારી આ આનંદના પ્રસંગે આશીર્વાદ આપવા આપને સ્નેહભર્યું આમંત્રણ પાઠવે છે."},
-       when:{en:["Saturday, 30 January 2027","8:00 PM onwards"],gu:["શનિવાર, તા. ૩૦ જાન્યુઆરી ૨૦૨૭","રાત્રે ૮:૦૦ કલાકથી"]}, venue:"starwoods",
+       at:"2027-01-30T20:00", when:{en:["Saturday, 30 January 2027","8:00 PM onwards"],gu:["શનિવાર, તા. ૩૦ જાન્યુઆરી ૨૦૨૭","રાત્રે ૮:૦૦ કલાકથી"]}, venue:"starwoods",
        name:{en:"Wedding Vows Renewal",gu:"વિવાહ વચન પુનઃનવીકરણ"}},
   3: { title:{en:"Village Celebrations",gu:"ગામનો પારંપરિક ઉત્સવ"}, top:"chhatri", bottom:"village", corners:true,
        sub:{en:"We are delighted to invite you for the traditional village celebrations.",gu:"ગામના પારંપરિક પ્રસંગોમાં આપને સહર્ષ આમંત્રણ."},
-       banner:{en:"Sunday, 31 January 2027",gu:"રવિવાર, તા. ૩૧ જાન્યુઆરી ૨૦૨૭"},
-       days:[{d:31, single:true, items:[
-          {ic:"fork", ring:true, t:{en:"6:00 PM",gu:"સાંજે ૬:૦૦"}, n:{en:"Gam No Vevar Jamanvar",gu:"ગામનો વ્યવહાર જમણવાર"}, s:{en:"Grand Family Dinner",gu:"સમૂહ ભોજન"}, p:"starwoods"},
-          {ic:"horse", ring:true, t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, n:{en:"Varghodo",gu:"વરઘોડો"}, s:{en:"Wedding Procession",gu:"વરરાજાની શોભાયાત્રા"}, p:"ambav"}]}]},
+       days:[{d:31, items:[
+          {ic:"fork", ring:true, t:{en:"6:00 PM",gu:"સાંજે ૬:૦૦"}, at:"2027-01-31T18:00", n:{en:"Gam No Vevar Jamanvar",gu:"ગામનો વ્યવહાર જમણવાર"}, s:{en:"Grand Family Dinner",gu:"સમૂહ ભોજન"}, p:"starwoods"},
+          {ic:"horse", ring:true, t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, at:"2027-01-31T20:00", n:{en:"Varghodo",gu:"વરઘોડો"}, s:{en:"Wedding Procession",gu:"વરરાજાની શોભાયાત્રા"}, p:"ambav"}]}]},
   4: { title:{en:"The Wedding",gu:"શુભ લગ્ન"}, top:"kumbh", topSm:true, bottom:"mandap", corners:true,
        sub:{en:"The honour of your presence is requested at the auspicious wedding of our son",gu:"અમારા પુત્રના શુભ લગ્ન પ્રસંગે આપ સહપરિવાર પધારશો"},
        couple:true,
        days:[{d:2, items:[
-          {t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, n:{en:"Hastmelap",gu:"હસ્તમેળાપ"}, s:{en:"Wedding Ceremony",gu:"લગ્નવિધિ"}, p:"krishna"},
-          {t:{en:"11:00 PM",gu:"રાત્રે ૧૧:૦૦"}, n:{en:"Vidai",gu:"વિદાય"}, p:"krishna"}]}]}
+          {t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, at:"2027-02-02T20:00", n:{en:"Hastmelap",gu:"હસ્તમેળાપ"}, s:{en:"Wedding Ceremony",gu:"લગ્નવિધિ"}, p:"krishna"},
+          {t:{en:"11:00 PM",gu:"રાત્રે ૧૧:૦૦"}, at:"2027-02-02T23:00", n:{en:"Vidai",gu:"વિદાય"}, p:"krishna"}]}]}
 };
 
 const T = {
@@ -397,8 +404,16 @@ const LOTUS = `<svg viewBox="0 0 330 22" preserveAspectRatio="xMidYMid meet"><g 
   <path d="M165 16c-9 1-17-1-22-5 8-1 15 1 22 5zM165 16c9 1 17-1 22-5-8-1-15 1-22 5z"/><circle cx="140" cy="15" r="1.8" fill="#c9a24b"/><circle cx="190" cy="15" r="1.8" fill="#c9a24b"/></g></svg>`;
 const where = p => `<a class="where" href="${MAP(PLACES[p].q)}" target="_blank" rel="noopener">${PIN}<span><u>${esc(PLACES[p][lang])}</u></span></a>`;
 
-function badge(k){ const d = DAYS[k], L = lang;
-  return `<div class="badge"><span class="wd">${esc(d.wd[L])}</span><span class="dn">${esc(d.n[L])}</span><span class="mo">${esc(d.m[L])}</span><span class="yr">${YEAR[L]}</span></div>`; }
+const CALT = {en:"Add to calendar", gu:"કૅલેન્ડરમાં ઉમેરો"};
+function cal(at, title, p){
+  if (!at) return "";
+  const s = new Date(at + ":00+05:30"), e = new Date(s.getTime() + 2*36e5);
+  const f = x => x.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Mehul-Surbhi//EN","BEGIN:VEVENT","UID:" + f(s) + "@mehul-surbhi",
+    "DTSTAMP:" + f(new Date()),"DTSTART:" + f(s),"DTEND:" + f(e),"SUMMARY:" + title + " – Mehul & Surbhi","LOCATION:" + PLACES[p].en.replace(/,/g, "\\,"),
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  return `<a class="cal" download="${title.replace(/[^A-Za-z]+/g, "-")}.ics" href="data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}">＋ ${CALT[lang]}</a>`;
+}
 
 function renderCards(){
   const L = lang;
@@ -409,21 +424,24 @@ function renderCards(){
       body += `<p class="hosts">${esc(e.hosts[L][0])}<b>&amp;</b>${esc(e.hosts[L][1])}</p>
         <p class="sub" style="font-style:normal">${esc(e.invite[L])}</p>
         <div class="when-box">${CAL}<div>${esc(e.when[L][0])}<br>${esc(e.when[L][1])}</div></div>
-        <div class="venue-c">${where(e.venue)}</div>`;
+        <div class="venue-c">${where(e.venue)}</div>${cal(e.at, "Wedding Vows Renewal", e.venue)}`;
     }
     if (e.couple) body += `<p class="couple" style="font-size:clamp(44px,12vw,58px)"><span>${esc(T[L].groom)}</span><i>${esc(T[L].with)}</i><span>${esc(T[L].bride)}</span></p><p class="bride-of">${esc(T[L].brideOf)}</p><svg class="lotus" data-lotus></svg>`;
-    if (e.banner) body += `<div class="pill" style="margin:4px 0 8px">${esc(e.banner[L])}</div>`;
-    if (e.days) body += e.days.map(d => `<div class="day${d.single ? " single" : ""}">${d.single ? "" : badge(d.d)}
-        <div class="items">${(() => { const one = d.items.length > 1 && d.items.every(i => i.p === d.items[0].p);
-          return d.items.map(i => `<div class="item">
-          <div class="ic${i.ring ? " ring" : ""}">${i.ic ? `<img src="img3/${i.ic}.png" alt="">` : ""}<span class="t">${esc(i.t[L])}</span></div>
-          <div class="what"><div class="n">${esc(i.n[L])}${i.s ? `<small>${esc(i.s[L])}</small>` : ""}</div>${one ? "" : where(i.p)}</div></div>`).join("")
-          + (one ? `<div class="same">${where(d.items[0].p)}</div>` : ""); })()}</div></div>`).join("");
-    const top = e.top ? `<img class="top-art${e.topSm ? " sm" : ""}" src="${e.top === "mandap" ? "img/mandap.png" : "img3/" + e.top + ".png"}" alt="">` : "";
-    const bottom = e.bottom ? `<img class="bottom-art" src="${e.bottom === "mandap" ? "img/mandap.png" : "img3/" + e.bottom + ".png"}" alt="">` : `<div style="height:30px"></div>`;
+    if (e.days) body += e.days.map(d => {
+        const one = d.items.length > 1 && d.items.every(i => i.p === d.items[0].p);
+        return `<div class="day"><div class="pill">${esc(DAYS[d.d][L])}</div>
+        ${d.items.map((i, n) => `${n ? '<div class="dots"><i></i><i></i><i></i></div>' : ""}<div class="ev">
+          ${i.ic ? `<img class="ic${i.ring ? " ring" : ""}" src="img3/${i.ic}.webp" alt="">` : ""}
+          <div class="t">${esc(i.t[L])}</div>
+          <div class="n">${esc(i.n[L])}</div>${i.s ? `<div class="s">${esc(i.s[L])}</div>` : ""}
+          ${one ? "" : where(i.p)}
+          ${cal(i.at, i.n.en, i.p)}</div>`).join("")}
+        ${one ? `<div class="same">${where(d.items[0].p)}</div>` : ""}</div>`; }).join("");
+    const top = e.top ? `<img class="top-art${e.topSm ? " sm" : ""}" src="${"img3/" + e.top + ".webp"}" alt="">` : "";
+    const bottom = e.bottom ? `<img class="bottom-art" src="${"img3/" + e.bottom + ".webp"}" alt="">` : `<div style="height:30px"></div>`;
     return `<section class="card rv">
-      ${e.corners ? `<img class="corner" src="img3/corner.png" alt=""><img class="corner r" src="img3/corner.png" alt="">` : ""}
-      ${e.corners && !e.bottom ? `<img class="corner b" src="img3/cornerb.png" alt=""><img class="corner b r" src="img3/cornerb.png" alt="">` : ""}
+      ${e.corners ? `<img class="corner" src="img3/corner.webp" alt=""><img class="corner r" src="img3/corner.webp" alt="">` : ""}
+      ${e.corners && !e.bottom ? `<img class="corner b" src="img3/cornerb.webp" alt=""><img class="corner b r" src="img3/cornerb.webp" alt="">` : ""}
       <div class="arch" ${e.top ? "" : 'style="padding-top:70px"'}>
         ${top}
         <h2>${esc(e.title[L])}</h2>
@@ -481,8 +499,35 @@ mBtn.onclick = () => { if (audio.paused) play(); else { audio.pause(); mBtn.clas
 document.addEventListener("visibilitychange", () => { if (document.hidden && !audio.paused) { audio.pause(); audio.dataset.resume = 1; }
   else if (!document.hidden && audio.dataset.resume) { delete audio.dataset.resume; play(); } });
 
+/* ---- falling marigold & rose petals, plus a burst on open and on RSVP ---- */
+const cv = document.getElementById("petals"), cx = cv.getContext("2d");
+const COLS = ["#f59e0b","#f97316","#fbbf24","#e11d48","#f472b6","#ffffff","#d4a843"];
+let P = [], dpr = Math.min(2, window.devicePixelRatio || 1), still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function size(){ cv.width = innerWidth*dpr; cv.height = innerHeight*dpr; }
+size(); addEventListener("resize", size);
+const petal = (burst) => ({ x: burst ? innerWidth/2 + (Math.random()-.5)*60 : Math.random()*innerWidth, y: burst ? innerHeight*.45 : -20,
+  vx: burst ? (Math.random()-.5)*9 : (Math.random()-.5)*.6, vy: burst ? -Math.random()*9-3 : Math.random()*.7+.5,
+  r: Math.random()*5+4, a: Math.random()*6.28, va: (Math.random()-.5)*.08, c: COLS[Math.random()*COLS.length|0], w: Math.random()*6.28, burst });
+function burst(n){ if (!still) for (let i=0;i<n;i++) P.push(petal(true)); }
+let last = 0;
+function frame(t){
+  if (!still && P.filter(p => !p.burst).length < 16 && t - last > 700) { P.push(petal(false)); last = t; }
+  cx.setTransform(dpr,0,0,dpr,0,0); cx.clearRect(0,0,innerWidth,innerHeight);
+  P = P.filter(p => p.y < innerHeight + 30);
+  for (const p of P) {
+    if (p.burst) { p.vy += .22; p.vx *= .985; } else { p.w += .02; p.vx = Math.sin(p.w)*.6; }
+    p.x += p.vx; p.y += p.vy; p.a += p.va;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.a); cx.scale(1, Math.abs(Math.sin(p.a*1.3))*.6+.4);
+    cx.fillStyle = p.c; cx.globalAlpha = .85; cx.beginPath(); cx.ellipse(0,0,p.r,p.r*.55,0,0,6.28); cx.fill();
+    cx.globalAlpha = .25; cx.fillStyle = "#7a3b00"; cx.beginPath(); cx.ellipse(-p.r*.2,0,p.r*.5,p.r*.12,0,0,6.28); cx.fill(); cx.restore();
+  }
+  requestAnimationFrame(frame);
+}
+if (!still) requestAnimationFrame(frame);
+
 document.getElementById("open").onclick = () => {
   document.getElementById("cover").classList.add("gone"); document.body.classList.remove("locked"); play(); reveal();
+  setTimeout(() => burst(90), 500);
 };
 if (params.has("open")) document.getElementById("open").click();
 
@@ -507,7 +552,7 @@ document.getElementById("form").onsubmit = async ev => {
   try {
     if (!RSVP_ENDPOINT) throw new Error("no endpoint");
     await fetch(RSVP_ENDPOINT, { method:"POST", mode:"no-cors", body: new URLSearchParams(data) });
-    f.classList.add("hidden"); document.getElementById("done").classList.remove("hidden");
+    f.classList.add("hidden"); document.getElementById("done").classList.remove("hidden"); burst(120);
   } catch (e) {
     err.textContent = T[lang].fail; err.classList.remove("hidden");
     btn.disabled = false; btn.textContent = T[lang].send;

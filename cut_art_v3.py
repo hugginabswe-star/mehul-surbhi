@@ -43,5 +43,10 @@ for name,(f,box,fe) in CUTS.items():
     m = m.filter(ImageFilter.GaussianBlur(fe/2))
     al = ImageChops.multiply(al, m)
     out = im.copy(); out.putalpha(al)
-    out.save(os.path.join(OUT, name+".png"), optimize=True)
+    # sharper on retina phones: 3x Lanczos upscale + unsharp mask
+    W3,H3 = out.width*3, out.height*3
+    rgb = out.convert('RGB').resize((W3,H3), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=2.2, percent=140, threshold=2))
+    a3 = out.getchannel('A').resize((W3,H3), Image.LANCZOS)
+    out = rgb; out.putalpha(a3)
+    out.save(os.path.join(OUT, name+".webp"), quality=88, method=6)
     print(name, out.size)
