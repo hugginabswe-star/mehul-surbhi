@@ -96,9 +96,12 @@ footer{text-align:center;padding:10px 0 50px;color:var(--muted);font-size:15px}
 footer .couple{font-size:40px;margin:0}
 .hidden{display:none!important}
 @media (max-width:420px){.couple{font-size:52px}.card{border-radius:120px 120px 14px 14px}.card::before{border-radius:114px 114px 9px 9px}.row{grid-template-columns:76px 1fr}}
+.spk{position:fixed;top:12px;left:12px;z-index:10;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--maroon);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 10px rgba(122,90,40,.12);padding:0}
+.spk svg{width:20px;height:20px}.spk .off{display:none}.spk.muted .on{display:none}.spk.muted .off{display:block}
 </style>
 </head>
 <body>
+<button class="spk" id="spk" aria-label="Mute music"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><g class="on"><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></g><g class="off"><path d="m16 9 6 6M22 9l-6 6"/></g></svg></button>
 <audio id="bgm" loop autoplay preload="auto"></audio>
 <div class="lang" role="group" aria-label="Language">
   <button data-l="en" class="on">English</button><button data-l="gu">ગુજરાતી</button>
@@ -320,6 +323,11 @@ bgm.play().catch(()=>{});
 const evs=["pointerdown","pointerup","touchstart","touchend","click","keydown"];
 const first=()=>{ bgm.play().then(()=>evs.forEach(t=>removeEventListener(t,first,true))).catch(()=>{}); };
 evs.forEach(t=>addEventListener(t,first,true));
+const spk=document.getElementById("spk");
+let muted=false; try{ muted=localStorage.getItem("muted")==="1"; }catch(e){}
+function setMute(m){ muted=m; bgm.muted=m; spk.classList.toggle("muted",m); spk.setAttribute("aria-label",m?"Unmute music":"Mute music"); try{localStorage.setItem("muted",m?"1":"0");}catch(e){} if(!m) bgm.play().catch(()=>{}); }
+setMute(muted);
+spk.addEventListener("click",e=>{ e.stopPropagation(); setMute(!muted); });
 document.addEventListener("visibilitychange",()=>{ if(document.hidden) bgm.pause(); else bgm.play().catch(()=>{}); });
 renderText();
 </script>
