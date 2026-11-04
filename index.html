@@ -96,15 +96,10 @@ footer{text-align:center;padding:10px 0 50px;color:var(--muted);font-size:15px}
 footer .couple{font-size:40px;margin:0}
 .hidden{display:none!important}
 @media (max-width:420px){.couple{font-size:52px}.card{border-radius:120px 120px 14px 14px}.card::before{border-radius:114px 114px 9px 9px}.row{grid-template-columns:76px 1fr}}
-.music{position:fixed;top:12px;left:12px;z-index:10;display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:7px 14px;font:600 14px "Cormorant Garamond",serif;color:var(--maroon);cursor:pointer;box-shadow:0 2px 10px rgba(122,90,40,.12)}
-.music .eq{display:flex;gap:2px;align-items:flex-end;height:12px}.music .eq i{width:3px;height:4px;background:var(--gold);border-radius:2px}
-.music.on .eq i{animation:eq .9s ease-in-out infinite}.music.on .eq i:nth-child(2){animation-delay:.2s}.music.on .eq i:nth-child(3){animation-delay:.4s}
-@keyframes eq{0%,100%{height:3px}50%{height:12px}}
 </style>
 </head>
 <body>
-<button class="music" id="music" aria-label="Music"><span class="eq"><i></i><i></i><i></i></span><span id="mlabel">♪ Play music</span></button>
-<audio id="bgm" loop preload="auto"></audio>
+<audio id="bgm" loop autoplay preload="auto"></audio>
 <div class="lang" role="group" aria-label="Language">
   <button data-l="en" class="on">English</button><button data-l="gu">ગુજરાતી</button>
 </div>
@@ -172,7 +167,7 @@ footer .couple{font-size:40px;margin:0}
 const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzgwZG5-oEoZ7HrtmG76FJ2_SdfxjhHnts38Y5jxMqyr8rBeydzGplF06uRbOW9Gb7j/exec";   // Google Apps Script web-app URL (RSVPs land in a Google Sheet + email)
 const RSVP_WHATSAPP = "";   // e.g. "919876543210" — country code, no + or spaces. Leave "" to hide.
 const RSVP_BY = { en: "Kindly reply by 10 January 2027", gu: "કૃપા કરી ૧૦ જાન્યુઆરી ૨૦૨૭ સુધીમાં જવાબ આપશો" };
-const MUSIC_FILE = "music/romantic.m4a";
+const MUSIC_FILE = "music/celebration.m4a";
 const WEDDING = new Date("2027-02-02T20:00:00+05:30");
 /* ============================================== */
 
@@ -271,7 +266,7 @@ function renderText(){
   document.querySelectorAll("[data-i]").forEach(el => { const v = T[lang][el.dataset.i]; if (v !== undefined) el.textContent = v; });
   document.querySelector(".rsvp .sub").textContent = RSVP_BY[lang];
   document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.l === lang));
-  renderCards(); tick(); setWa(); if (typeof mState==="function") mState();
+  renderCards(); tick(); setWa();
 }
 
 function tick(){
@@ -318,15 +313,13 @@ document.getElementById("form").onsubmit = async ev => {
 };
 
 
-/* music: phones block autoplay, so start on the first tap anywhere */
-const bgm=document.getElementById("bgm"), mbtn=document.getElementById("music"), mlab=document.getElementById("mlabel");
-bgm.src=MUSIC_FILE; bgm.volume=.6; let userPaused=false;
-function mState(){ const on=!bgm.paused; mbtn.classList.toggle("on",on); mlab.textContent=on?(lang==="gu"?"♪ સંગીત ચાલુ":"♪ Music on"):(lang==="gu"?"♪ સંગીત વગાડો":"♪ Play music"); }
-bgm.onplay=bgm.onpause=mState;
-mbtn.onclick=e=>{ e.stopPropagation(); if(bgm.paused){userPaused=false;bgm.play().catch(()=>{});} else {userPaused=true;bgm.pause();} };
+/* music plays by default; phones block sound until the first touch, so it also starts on the first tap/scroll-tap anywhere */
+const bgm=document.getElementById("bgm"); bgm.src=MUSIC_FILE; bgm.volume=.7;
 bgm.play().catch(()=>{});
-const first=()=>{ if(!userPaused&&bgm.paused) bgm.play().catch(()=>{}); ["pointerup","touchend","keydown"].forEach(t=>removeEventListener(t,first)); };
-["pointerup","touchend","keydown"].forEach(t=>addEventListener(t,first));
+const evs=["pointerdown","pointerup","touchstart","touchend","click","keydown"];
+const first=()=>{ bgm.play().then(()=>evs.forEach(t=>removeEventListener(t,first,true))).catch(()=>{}); };
+evs.forEach(t=>addEventListener(t,first,true));
+document.addEventListener("visibilitychange",()=>{ if(document.hidden) bgm.pause(); else bgm.play().catch(()=>{}); });
 renderText();
 </script>
 </body>
