@@ -262,7 +262,7 @@ const T = {
   en:{ mantra:"॥ Shree Ganeshaya Namah ॥", lead:"With the blessings of our elders", family:"Shri Shambhubhai Shivabhai Patel Family",
        invites:"joyfully invites you to the wedding celebrations of our son", groom:"Mehul", with:"with", bride:"Dr. Surbhi",
        brideOf:"Daughter of Shri Shaileshbhai Bachubhai Ramani", dates:"29 JAN – 2 FEB 2027",
-       events:"Your Invitation", d:"Days", h:"Hours", m:"Minutes", map:"View on map",
+       events:"Your Invitation", d:"Days", h:"Hours", m:"Minutes", s:"Seconds", map:"View on map",
        rsvpH:"RSVP", fName:"Your name", fPhone:"Mobile number", fAttend:"Will you attend?", yes:"Yes, with joy", no:"Sorry, can't make it",
        fCount:"Number of guests (including you)", fEvents:"Which functions will you attend?", fMsg:"Blessings or a message (optional)",
        send:"SEND RSVP", sending:"Sending…", thanks:"Thank you!", thanksSub:"Your reply has reached the Patel family.",
@@ -273,7 +273,7 @@ const T = {
   gu:{ mantra:"॥ શ્રી ગણેશાય નમઃ ॥", lead:"વડીલોના આશીર્વાદ સાથે", family:"શ્રી શંભુભાઈ શિવાભાઈ પટેલ પરિવાર",
        invites:"અમારા પુત્રના શુભ લગ્ન પ્રસંગે આપને સ્નેહભર્યું આમંત્રણ પાઠવે છે", groom:"ચિ. મેહુલ", with:"સાથે", bride:"ડૉ. સુરભી",
        brideOf:"(શ્રી શૈલેષભાઈ બચુભાઈ રમાણીની સુપુત્રી)", dates:"તા. ૨૯ જાન્યુ. – ૨ ફેબ્રુ. ૨૦૨૭",
-       events:"આપનું આમંત્રણ", d:"દિવસ", h:"કલાક", m:"મિનિટ", map:"નકશામાં જુઓ",
+       events:"આપનું આમંત્રણ", d:"દિવસ", h:"કલાક", m:"મિનિટ", s:"સેકન્ડ", map:"નકશામાં જુઓ",
        rsvpH:"આપની હાજરી જણાવશો", fName:"આપનું નામ", fPhone:"મોબાઈલ નંબર", fAttend:"આપ પધારશો?", yes:"હા, જરૂર", no:"માફ કરશો, નહીં આવી શકીએ",
        fCount:"કુલ વ્યક્તિઓ (આપ સહિત)", fEvents:"કયા પ્રસંગોમાં પધારશો?", fMsg:"આશીર્વાદ કે સંદેશ (વૈકલ્પિક)",
        send:"જવાબ મોકલો", sending:"મોકલાઈ રહ્યું છે…", thanks:"આભાર!", thanksSub:"આપનો જવાબ પટેલ પરિવારને મળી ગયો છે.",
@@ -344,10 +344,10 @@ function renderText(){
 function tick(){
   const ms = WEDDING - Date.now(), c = document.getElementById("count");
   if (ms <= 0) { c.innerHTML = ""; return; }
-  const d = Math.floor(ms/864e5), h = Math.floor(ms/36e5)%24, m = Math.floor(ms/6e4)%60;
-  c.innerHTML = [[d,"d"],[h,"h"],[m,"m"]].map(([v,k]) => `<div><b>${v}</b><span>${T[lang][k]}</span></div>`).join("");
+  const d = Math.floor(ms/864e5), h = Math.floor(ms/36e5)%24, m = Math.floor(ms/6e4)%60, sc = Math.floor(ms/1e3)%60;
+  c.innerHTML = [[d,"d"],[h,"h"],[m,"m"],[sc,"s"]].map(([v,k]) => `<div><b>${v}</b><span>${T[lang][k]}</span></div>`).join("");
 }
-setInterval(tick, 30000);
+setInterval(tick, 1000);
 
 function setWa(){
   const a = document.getElementById("wa");
