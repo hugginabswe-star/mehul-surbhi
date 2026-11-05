@@ -98,6 +98,19 @@ footer .couple{font-size:40px;margin:0}
 @media (max-width:420px){.couple{font-size:52px}.card{border-radius:120px 120px 14px 14px}.card::before{border-radius:114px 114px 9px 9px}.row{grid-template-columns:76px 1fr}}
 .spk{position:fixed;top:12px;left:12px;z-index:10;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--maroon);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 10px rgba(122,90,40,.12);padding:0}
 .spk svg{width:20px;height:20px}.spk .off{display:none}.spk.muted .on{display:none}.spk.muted .off{display:block}
+/* front page: choose side */
+#front{position:fixed;inset:0;z-index:8;background:var(--ivory);overflow:auto;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 16px 40px}
+#front .floral{position:fixed}
+#front .fq{margin-top:26px;color:var(--muted);font-size:18px;font-style:italic}
+body.gu #front .fq{font-style:normal;font-size:16px}
+.sides{display:flex;gap:14px;margin-top:14px;width:100%;max-width:440px}
+.sides button{flex:1;border:1px solid var(--gold-l);background:var(--paper);border-radius:90px 90px 14px 14px;padding:26px 10px 16px;cursor:pointer;font:inherit;color:var(--maroon);box-shadow:0 6px 20px rgba(122,90,40,.10);transition:transform .2s,box-shadow .2s}
+.sides button:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(122,90,40,.18)}
+.sides b{display:block;font-size:22px;font-weight:700}
+.sides span{display:block;font-size:15px;color:var(--muted);margin-top:2px}
+.sides i{display:block;font-style:normal;font-size:26px;margin-bottom:4px}
+body.front-open{overflow:hidden}
+.back{display:inline-block;margin-top:14px;color:var(--green);font-size:15px;background:none;border:0;border-bottom:1px dotted var(--green);cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
@@ -105,6 +118,21 @@ footer .couple{font-size:40px;margin:0}
 <audio id="bgm" loop autoplay preload="auto"></audio>
 <div class="lang" role="group" aria-label="Language">
   <button data-l="en" class="on">English</button><button data-l="gu">ગુજરાતી</button>
+</div>
+
+<div id="front" class="hidden">
+  <img class="floral art" src="img/floral.png" alt="">
+  <img class="floral r art" src="img/floral.png" alt="">
+  <img class="ganesha art" src="img/ganesha.png" alt="Shree Ganesh">
+  <div class="mantra" data-i="mantra"></div>
+  <p class="lead" data-i="fWelcome"></p>
+  <h1 class="couple"><span data-i="fA"></span><span class="w" data-i="fWith"></span><span data-i="fB"></span></h1>
+  <div class="dates" data-i="dates"></div>
+  <p class="fq" data-i="fQ"></p>
+  <div class="sides">
+    <button data-side="groom"><i>🤵</i><b data-i="fGroom"></b><span data-i="fGroomSub"></span></button>
+    <button data-side="bride"><i>👰</i><b data-i="fBride"></b><span data-i="fBrideSub"></span></button>
+  </div>
 </div>
 
 <header class="hero">
@@ -162,6 +190,7 @@ footer .couple{font-size:40px;margin:0}
 <footer>
   <div class="divider"></div>
   <p data-i="footer"></p>
+  <button class="back" id="back" data-i="back"></button>
   <p class="couple">Mehul &amp; Surbhi</p>
 </footer>
 
@@ -208,7 +237,25 @@ const EVENTS = {
        intro:{en:"The honour of your presence is requested at the auspicious wedding of our son.",gu:"અમારા પુત્રના શુભ લગ્ન પ્રસંગે આપ સહપરિવાર પધારશો."},
        days:[{d:{en:"Tuesday, 2 February 2027",gu:"તા. ૨ ફેબ્રુઆરી ૨૦૨૭, મંગળવાર"}, items:[
           {t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, n:{en:"Hastmelap (Wedding Ceremony)",gu:"હસ્તમેળાપ (લગ્નવિધિ)"}, p:"krishna"},
-          {t:{en:"11:00 PM",gu:"રાત્રે ૧૧:૦૦"}, n:{en:"Vidai",gu:"વિદાય"}, p:"krishna"}]}]}
+          {t:{en:"11:00 PM",gu:"રાત્રે ૧૧:૦૦"}, n:{en:"Vidai",gu:"વિદાય"}, p:"krishna"}]}]},
+  /* bride side (Ramani family) */
+  5: { tag:{en:"Pre-Wedding",gu:"પૂર્વ વૈવાહિક"}, title:{en:"Haldi & Sangeet Night",gu:"હલદી તથા સંગીત સંધ્યા"},
+       intro:{en:"With the blessings of our elders, we invite you to the pre-wedding celebrations of our daughter Dr. Surbhi.",gu:"સુપુત્રી ડૉ. સુરભીના શુભ લગ્ન પ્રસંગે યોજાનાર પૂર્વ વૈવાહિક કાર્યક્રમોમાં આપને સ્નેહભર્યું આમંત્રણ."},
+       days:[{d:{en:"Monday, 1 February 2027",gu:"તા. ૧ ફેબ્રુઆરી ૨૦૨૭, સોમવાર"}, items:[
+          {t:{en:"10:00 AM",gu:"સવારે ૧૦:૦૦"}, n:{en:"Haldi Ceremony",gu:"હલદી સમારોહ"}, p:"krishna"},
+          {t:{en:"8:00 PM",gu:"રાત્રે ૮:૦૦"}, n:{en:"Sangeet Night",gu:"સંગીત સંધ્યા"}, p:"krishna"}]}]}
+};
+/* bride-side wording for the wedding card */
+EVENTS[4].introB = {en:"The honour of your presence is requested at the auspicious wedding of our daughter.",gu:"અમારી સુપુત્રીના શુભ લગ્ન પ્રસંગે આપ સહપરિવાર પધારશો."};
+EVENTS[4].titleB = {en:"Wedding of Dr. Surbhi & Mehul",gu:"ડૉ. સુરભી તથા ચિ. મેહુલના શુભ લગ્ન"};
+/* text that changes on the bride side */
+const TB = {
+  en:{ family:"Shri Shaileshbhai Bachubhai Ramani Family", invites:"joyfully invites you to the wedding celebrations of our daughter",
+       groom:"Dr. Surbhi", bride:"Mehul", brideOf:"Son of Shri Shambhubhai Shivabhai Patel", dates:"1 – 2 FEB 2027",
+       thanksSub:"Your reply has reached the Ramani family.", footer:"With love and best compliments from the Ramani family" },
+  gu:{ family:"શ્રી શૈલેષભાઈ બચુભાઈ રમાણી પરિવાર", invites:"અમારી સુપુત્રીના શુભ લગ્ન પ્રસંગે આપને સ્નેહભર્યું આમંત્રણ પાઠવે છે",
+       groom:"ડૉ. સુરભી", bride:"ચિ. મેહુલ", brideOf:"(શ્રી શંભુભાઈ શિવાભાઈ પટેલના સુપુત્ર)", dates:"તા. ૧ – ૨ ફેબ્રુ. ૨૦૨૭",
+       thanksSub:"આપનો જવાબ રમાણી પરિવારને મળી ગયો છે.", footer:"રમાણી પરિવાર તરફથી સ્નેહ અને શુભેચ્છાઓ સહ" }
 };
 
 const T = {
@@ -220,7 +267,9 @@ const T = {
        fCount:"Number of guests (including you)", fEvents:"Which functions will you attend?", fMsg:"Blessings or a message (optional)",
        send:"SEND RSVP", sending:"Sending…", thanks:"Thank you!", thanksSub:"Your reply has reached the Patel family.",
        wa:"Or reply on WhatsApp", need:"Please enter your name and mobile number.", fail:"Could not send. Please try again or reply on WhatsApp.",
-       footer:"With love and best compliments from the Patel family" },
+       footer:"With love and best compliments from the Patel family",
+       fWelcome:"Wedding Invitation", fA:"Mehul", fWith:"&", fB:"Surbhi", fQ:"Please choose your invitation",
+       fGroom:"Groom's Side", fGroomSub:"Patel Family", fBride:"Bride's Side", fBrideSub:"Ramani Family", back:"← Back to the front page" },
   gu:{ mantra:"॥ શ્રી ગણેશાય નમઃ ॥", lead:"વડીલોના આશીર્વાદ સાથે", family:"શ્રી શંભુભાઈ શિવાભાઈ પટેલ પરિવાર",
        invites:"અમારા પુત્રના શુભ લગ્ન પ્રસંગે આપને સ્નેહભર્યું આમંત્રણ પાઠવે છે", groom:"ચિ. મેહુલ", with:"સાથે", bride:"ડૉ. સુરભી",
        brideOf:"(શ્રી શૈલેષભાઈ બચુભાઈ રમાણીની સુપુત્રી)", dates:"તા. ૨૯ જાન્યુ. – ૨ ફેબ્રુ. ૨૦૨૭",
@@ -229,14 +278,33 @@ const T = {
        fCount:"કુલ વ્યક્તિઓ (આપ સહિત)", fEvents:"કયા પ્રસંગોમાં પધારશો?", fMsg:"આશીર્વાદ કે સંદેશ (વૈકલ્પિક)",
        send:"જવાબ મોકલો", sending:"મોકલાઈ રહ્યું છે…", thanks:"આભાર!", thanksSub:"આપનો જવાબ પટેલ પરિવારને મળી ગયો છે.",
        wa:"અથવા WhatsApp પર જવાબ આપો", need:"કૃપા કરી નામ અને મોબાઈલ નંબર લખો.", fail:"મોકલી શકાયું નહીં. ફરી પ્રયાસ કરો અથવા WhatsApp પર જવાબ આપો.",
-       footer:"પટેલ પરિવાર તરફથી સ્નેહ અને શુભેચ્છાઓ સહ" }
+       footer:"પટેલ પરિવાર તરફથી સ્નેહ અને શુભેચ્છાઓ સહ",
+       fWelcome:"શુભ લગ્ન આમંત્રણ", fA:"મેહુલ", fWith:"&", fB:"સુરભી", fQ:"કૃપા કરી આપનું આમંત્રણ પસંદ કરો",
+       fGroom:"વર પક્ષ", fGroomSub:"પટેલ પરિવાર", fBride:"કન્યા પક્ષ", fBrideSub:"રમાણી પરિવાર", back:"← પ્રથમ પાના પર પાછા જાઓ" }
 };
 
 /* Which functions this guest is invited to: ?e=134 (default 134). 2 = parents' vows renewal, special guests only. */
 const params = new URLSearchParams(location.search);
-let invited = (params.get("e") || "134").split("").filter(k => EVENTS[k]);
-if (!invited.length) invited = ["1","3","4"];
-invited = [...new Set(invited)].sort();
+/* ?side=groom | ?side=bride skips the front page; ?e=… implies groom side */
+let side = params.get("side") || (params.get("e") ? "groom" : "");
+let invited = [];
+function setInvited(){
+  if (side === "bride") { invited = ["5","4"]; return; }
+  invited = (params.get("e") || "134").split("").filter(k => EVENTS[k] && k !== "5");
+  if (!invited.length) invited = ["1","3","4"];
+  invited = [...new Set(invited)].sort();
+}
+const tx = k => (side === "bride" && TB[lang][k] !== undefined) ? TB[lang][k] : T[lang][k];
+function showFront(on){
+  document.getElementById("front").classList.toggle("hidden", !on);
+  document.body.classList.toggle("front-open", on);
+}
+function choose(s){ side = s; setInvited(); renderText(); showFront(false); scrollTo(0,0);
+  try { history.replaceState(null, "", "?" + (params.get("e") && s==="groom" ? "e="+params.get("e")+"&" : "") + "side=" + s); } catch(e){} }
+document.querySelectorAll(".sides button").forEach(b => b.addEventListener("click", () => choose(b.dataset.side)));
+document.getElementById("back").onclick = () => { showFront(true); document.getElementById("front").scrollTop = 0; };
+setInvited();
+if (side !== "groom" && side !== "bride") { side = ""; showFront(true); }
 
 let lang = "en";
 try { if (localStorage.getItem("lang") === "gu") lang = "gu"; } catch(e){}
@@ -250,9 +318,9 @@ function renderCards(){
     const e = EVENTS[k];
     return `<article class="card">
       <span class="tag">${esc(e.tag[L])}</span>
-      <h3>${esc(e.title[L])}</h3>
+      <h3>${esc(((side==="bride"&&e.titleB)||e.title)[L])}</h3>
       ${e.hosts ? `<p class="hosts">${esc(e.hosts[L])}</p>` : ""}
-      ${e.intro ? `<p class="intro">${esc(e.intro[L])}</p>` : ""}
+      ${e.intro ? `<p class="intro">${esc(((side==="bride"&&e.introB)||e.intro)[L])}</p>` : ""}
       ${e.days.map(d => `<div class="day">${esc(d.d[L])}</div>` + d.items.map(i => `
         <div class="row"><div class="t">${esc(i.t[L])}</div>
           <div><div class="n">${esc(i.n[L])}</div>
@@ -267,7 +335,7 @@ function renderCards(){
 function renderText(){
   document.body.classList.toggle("gu", lang === "gu");
   document.documentElement.lang = lang;
-  document.querySelectorAll("[data-i]").forEach(el => { const v = T[lang][el.dataset.i]; if (v !== undefined) el.textContent = v; });
+  document.querySelectorAll("[data-i]").forEach(el => { const v = tx(el.dataset.i); if (v !== undefined) el.textContent = v; });
   document.querySelector(".rsvp .sub").textContent = RSVP_BY[lang];
   document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.l === lang));
   renderCards(); tick(); setWa();
@@ -301,7 +369,7 @@ document.getElementById("form").onsubmit = async ev => {
     name: f.elements["name"].value.trim(), phone: f.elements["phone"].value.trim(),
     attending: f.elements["attending"].value, guests: f.elements["attending"].value === "Yes" ? f.elements["guests"].value : "0",
     events: [...f.querySelectorAll("input[name=events]:checked")].map(x => x.value).join(", "),
-    message: f.elements["message"].value.trim(), invite: invited.join(""), lang
+    message: f.elements["message"].value.trim(), invite: (side||"groom") + ":" + invited.join(""), lang
   };
   err.classList.add("hidden");
   if (!data.name || !data.phone) { err.textContent = T[lang].need; err.classList.remove("hidden"); return; }
